@@ -1,0 +1,15 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.suo
+*.user
+
+# Copies (Yandex.Disk sync artifacts)
+* (копия*).css
+* (копия*).js
+* (копия*).html

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Сказ о Сундуке Заветном</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+</head>
+<body>
+
+  <div class="world-bg"></div>
+  <div id="particles-bg"></div>
+
+  <!-- ═══ SCENE 1: INTRO ═══ -->
+  <div id="scene-intro" class="scene active">
+    <div class="parchment animate__animated animate__fadeIn">
+      <p class="eyebrow">✦ 8 Марта ✦</p>
+      <h1>Сказ о Сундуке<br>Заветном</h1>
+      <p class="tagline">Сокровище ждёт своих хозяек</p>
+      <div class="ornate-line"><span>✦</span></div>
+      <p class="intro-verse verse">
+        Слух прошёл в краю честном —<br>
+        Будто клад в ларце чудесном<br>
+        Ждёт красавиц дорогих,<br>
+        Краше нет, ей-ей, других!
+      </p>
+    </div>
+    <button class="btn animate__animated animate__fadeInUp animate__delay-1s"
+            onclick="showScene(2)">
+      В путь-дорогу!
+    </button>
+  </div>
+
+  <!-- ═══ SCENE 2: CHEST + COMBO LOCK ═══ -->
+  <div id="scene-chest" class="scene">
+
+    <div class="chest-visual">
+      <div class="chest-lid"></div>
+      <div class="chest-lock">
+        <div class="chest-lock-shackle"></div>
+        <div class="chest-lock-body"></div>
+      </div>
+      <div class="chest-box">
+        <div class="chest-corner tl"></div>
+        <div class="chest-corner tr"></div>
+        <div class="chest-corner bl"></div>
+        <div class="chest-corner br"></div>
+      </div>
+      <div class="chest-glow"></div>
+    </div>
+
+    <div class="parchment">
+      <h2>Замок на сундуке крепок!</h2>
+      <p class="hint verse">
+        Вращайте барабаны — назовите<br>
+        Шесть заветных цифр, что знаете
+      </p>
+
+      <!-- Combo Lock — filled by JS -->
+      <div class="combo-lock-wrap">
+        <div class="combo-lock" id="combo-lock"></div>
+      </div>
+
+      <p class="error-msg" id="error-msg">&nbsp;</p>
+
+      <button class="btn" onclick="checkCode()">Отворить!</button>
+    </div>
+  </div>
+
+  <!-- ═══ SCENE 3: OPENING ═══ -->
+  <div id="scene-opening" class="scene">
+    <div class="chest-open-visual">
+      <div class="chest-rays">
+        <div class="ray" style="transform:rotate(-55deg);left:38%"></div>
+        <div class="ray" style="transform:rotate(-35deg);left:43%"></div>
+        <div class="ray" style="transform:rotate(-15deg);left:48%"></div>
+        <div class="ray" style="transform:rotate(5deg); left:52%"></div>
+        <div class="ray" style="transform:rotate(25deg);left:57%"></div>
+        <div class="ray" style="transform:rotate(45deg);left:62%"></div>
+        <div class="ray" style="transform:rotate(65deg);left:67%"></div>
+      </div>
+      <div class="chest-inner-glow"></div>
+      <div class="chest-lid"></div>
+      <div class="chest-box">
+        <div class="chest-corner tl"></div>
+        <div class="chest-corner tr"></div>
+        <div class="chest-corner bl"></div>
+        <div class="chest-corner br"></div>
+      </div>
+    </div>
+    <h2 class="verse">Скрипнул ларчик золотой...<br>Свет волшебный — пред тобой!</h2>
+  </div>
+
+  <!-- ═══ SCENE 4: REWARD ═══ -->
+  <div id="scene-reward" class="scene">
+    <div class="parchment">
+      <h2 id="reward-title"></h2>
+      <div class="ornate-line"><span>✦</span></div>
+      <p class="congrats-text verse" id="reward-text"></p>
+    </div>
+    <div class="cards-container" id="cards-container"></div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
