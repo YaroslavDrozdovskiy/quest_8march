@@ -2,7 +2,7 @@
    КОНФИГУРАЦИЯ — меняй здесь
    ═══════════════════════════════════════════════ */
 
-const SECRET_CODE = '000000';
+const SECRET_CODE = '0000';
 
 // Чтобы добавить приз — скопируй объект ниже и заполни поля:
 // { name: 'Название', value: 'Сумма', img: 'assets/имя_файла.jpg' }
@@ -53,7 +53,7 @@ function showScene(n) {
    ═══════════════════════════════════════════════ */
 
 const ITEM_H       = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--item-h')) || 54;
-const DRUM_COUNT   = 6;
+const DRUM_COUNT   = 4;
 // Padded strip: wrap-around so digit 0 always shows prev/next neighbours
 const STRIP_DIGITS = ['9','0','1','2','3','4','5','6','7','8','9','0'];
 const drumValues   = new Array(DRUM_COUNT).fill(0);
@@ -63,13 +63,6 @@ function buildComboLock() {
   housing.innerHTML = '';
 
   for (let i = 0; i < DRUM_COUNT; i++) {
-    // Separator between digit groups 3|3
-    if (i === 3) {
-      const sep = document.createElement('div');
-      sep.className = 'lock-sep';
-      housing.appendChild(sep);
-    }
-
     const col = document.createElement('div');
     col.className = 'drum-col';
     col.dataset.index = i;
