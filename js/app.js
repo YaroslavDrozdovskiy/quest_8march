@@ -194,7 +194,7 @@ function showChestVideo() {
 }
 
 /* ADDED: scroll display — scroll text constant */
-const SCROLL_TEXT_TITLE = '🜂 Свиток из казны Сберградовской';
+const SCROLL_TEXT_TITLE = '⚜ Свиток из казны Сберградовской';
 const SCROLL_TEXT_BODY =
 `Сударыни мудрые и отважные!
 
