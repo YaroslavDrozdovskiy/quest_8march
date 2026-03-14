@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Сказ о Сундуке Заветном</title>
+  <title></title>
   <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
@@ -18,21 +18,14 @@
   <!-- ═══ SCENE 1: INTRO ═══ -->
   <div id="scene-intro" class="scene active">
     <div class="parchment animate__animated animate__fadeIn">
-      <p class="eyebrow">✦ 8 Марта ✦</p>
-      <h1>Сказ о Сундуке<br>Заветном</h1>
-      <p class="tagline">Сокровище ждёт своих хозяек</p>
+      <p class="eyebrow" id="intro-eyebrow"></p>
+      <h1 id="intro-title"></h1>
+      <p class="tagline" id="intro-tagline"></p>
       <div class="ornate-line"><span>✦</span></div>
-      <p class="intro-verse verse">
-        Слух прошёл в краю честном —<br>
-        Будто клад в ларце чудесном<br>
-        Ждёт красавиц дорогих,<br>
-        Краше нет, ей-ей, других!
-      </p>
+      <p class="intro-verse verse" id="intro-verse"></p>
     </div>
     <button class="btn animate__animated animate__fadeInUp animate__delay-1s"
-            onclick="showScene(2)">
-      В путь-дорогу!
-    </button>
+            id="intro-start-btn" onclick="showScene(2)"></button>
   </div>
 
   <!-- ═══ SCENE 2: CHEST + COMBO LOCK ═══ -->
@@ -54,11 +47,8 @@
     </div>
 
     <div class="parchment">
-      <h2>Замок на сундуке крепок!</h2>
-      <p class="hint verse">
-        Вращайте барабаны — назовите<br>
-        Четыре заветных цифры, что знаете
-      </p>
+      <h2 id="chest-title"></h2>
+      <p class="hint verse" id="chest-hint"></p>
 
       <!-- Combo Lock — filled by JS -->
       <div class="combo-lock-wrap">
@@ -67,7 +57,7 @@
 
       <p class="error-msg" id="error-msg">&nbsp;</p>
 
-      <button class="btn" onclick="checkCode()">Отворить!</button>
+      <button class="btn" id="chest-open-btn" onclick="checkCode()"></button>
     </div>
   </div>
 
@@ -92,7 +82,7 @@
         <div class="chest-corner br"></div>
       </div>
     </div>
-    <h2 class="verse">Скрипнул ларчик золотой...<br>Свет волшебный — пред тобой!</h2>
+    <h2 class="verse" id="opening-verse"></h2>
   </div>
 
   <!-- ═══ SCENE 4: REWARD ═══ -->
@@ -105,14 +95,20 @@
     <div class="cards-container" id="cards-container"></div>
   </div>
 
-  <!-- ADDED: chest video — fullscreen video overlay -->
+  <!-- chest video — ornate framed overlay -->
   <div id="video-overlay">
-    <video id="chest-video" muted playsinline preload="auto">
-      <source src="reference/Анимация_открытия_сундука.mp4" type="video/mp4">
-    </video>
+    <div id="video-frame">
+      <span class="vf-corner vf-tl">✦</span>
+      <span class="vf-corner vf-tr">✦</span>
+      <video id="chest-video" muted playsinline preload="auto">
+        <source src="assets/Анимация_открытия_сундука.mp4" type="video/mp4">
+      </video>
+      <span class="vf-corner vf-bl">✦</span>
+      <span class="vf-corner vf-br">✦</span>
+    </div>
   </div>
 
-  <!-- ADDED: scroll display — scroll text scene -->
+  <!-- scroll text scene -->
   <div id="scene-scroll" class="scene">
     <div class="scroll-outer">
       <div class="scroll-rod scroll-rod-top"></div>
@@ -125,14 +121,15 @@
         </div>
         <div class="scroll-fade-bottom"></div>
         <div class="scroll-hint" id="scroll-hint">
-          <span class="scroll-hint-icon">↓ листайте</span>
+          <span class="scroll-hint-icon" id="scroll-hint-text"></span>
         </div>
       </div>
       <div class="scroll-rod scroll-rod-bottom"></div>
     </div>
-    <button class="btn scroll-next-btn" onclick="proceedToReward()">Далее ✦</button>
+    <button class="btn scroll-next-btn" id="scroll-next-btn" onclick="proceedToReward()"></button>
   </div>
 
+  <script src="js/content.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
