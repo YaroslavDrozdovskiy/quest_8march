@@ -635,6 +635,173 @@ body {
   #scene-reward .parchment { padding: 18px 14px 16px; }
 }
 
+/* ═══════════════════════════════════════════════
+   ADDED: chest video — fullscreen video overlay
+   ═══════════════════════════════════════════════ */
+#video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+#video-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+#chest-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════════════════
+   ADDED: scroll display — scroll text scene
+   ═══════════════════════════════════════════════ */
+#scene-scroll {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px 16px;
+}
+
+.scroll-outer {
+  position: relative;
+  max-width: 580px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Decorative wooden rods top & bottom */
+.scroll-rod {
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: linear-gradient(180deg,
+    #a06030 0%, #d4944a 30%, #f0c070 50%, #d4944a 70%, #7a4010 100%);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  position: relative;
+  z-index: 2;
+}
+
+/* Body wrapper — positions fade and hint relative to scroll area */
+.scroll-body-wrap {
+  position: relative;
+}
+
+/* The scrollable parchment area */
+.scroll-content-wrapper {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255,245,210,0.6) 0%, transparent 60%),
+    linear-gradient(160deg, #f5e8c0 0%, #edd9a0 40%, #f0e2b5 100%);
+  max-height: 58vh;
+  overflow-y: scroll;          /* always show scrollbar */
+  padding: 28px 20px 28px 24px;
+  box-shadow:
+    inset 3px 0 8px rgba(0,0,0,0.08),
+    inset -3px 0 8px rgba(0,0,0,0.08),
+    inset 0 6px 16px rgba(0,0,0,0.12),
+    inset 0 -6px 16px rgba(0,0,0,0.12);
+
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #5c3a1e #c8a060;
+}
+
+/* Webkit scrollbar — always visible, clearly styled */
+.scroll-content-wrapper::-webkit-scrollbar {
+  width: 13px;
+}
+.scroll-content-wrapper::-webkit-scrollbar-track {
+  background: #c8a060;
+  border-radius: 0;
+}
+.scroll-content-wrapper::-webkit-scrollbar-thumb {
+  background: #5c3a1e;
+  border-radius: 6px;
+  min-height: 44px;
+  border: 2px solid #c8a060;
+}
+.scroll-content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #3d2210;
+}
+
+/* Scroll text typography */
+.scroll-text {
+  font-family: Georgia, 'Times New Roman', serif;
+  color: #2e1508;
+  line-height: 1.95;
+  font-size: clamp(0.92rem, 1.8vw, 1.05rem);
+  white-space: pre-wrap;
+}
+.scroll-text-title {
+  display: block;
+  text-align: center;
+  font-size: clamp(1rem, 2.2vw, 1.18rem);
+  font-weight: bold;
+  color: #5c3a1e;
+  margin-bottom: 22px;
+  letter-spacing: 0.5px;
+}
+.scroll-text-body {
+  display: block;
+}
+
+/* Bottom fade gradient — signals more content below */
+.scroll-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 13px;  /* leave room for scrollbar */
+  height: 52px;
+  background: linear-gradient(transparent, rgba(210, 165, 70, 0.45));
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.4s ease;
+}
+.scroll-fade-bottom.hidden { opacity: 0; }
+
+/* Bouncing scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 13px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 0.4s ease;
+}
+.scroll-hint.hidden { opacity: 0; }
+.scroll-hint-icon {
+  display: inline-block;
+  font-family: Georgia, serif;
+  font-size: 0.82rem;
+  font-weight: bold;
+  color: #5c3a1e;
+  background: rgba(245, 232, 190, 0.9);
+  border: 1px solid #a07030;
+  padding: 3px 14px;
+  border-radius: 20px;
+  animation: scrollHintBounce 1.5s ease-in-out infinite;
+}
+@keyframes scrollHintBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+
+/* "Далее" button spacing */
+.scroll-next-btn { flex-shrink: 0; }
+
 /* ── Landscape / short screens (≤ 500px height) ── */
 @media (max-height: 500px) {
   .chest-visual { width: 100px; height: 92px; margin-bottom: 10px; }
