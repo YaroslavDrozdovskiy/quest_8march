@@ -585,6 +585,10 @@ body {
 @media (max-width: 768px) {
   #scene-reward { justify-content: flex-start; padding-top: 24px; }
   .cards-container { gap: 14px; }
+
+  /* Scroll scene — tablet */
+  #scene-scroll { gap: 14px; padding: 20px 14px; }
+  .scroll-content-wrapper { max-height: 54vh; }
 }
 
 /* ── Large phone / landscape (≤ 600px) ── */
@@ -600,6 +604,17 @@ body {
   .lock-sep   { margin: 0 4px; }
   .drum-arrow { width: 40px; height: 28px; font-size: 0.65rem; }
   .drum-window, .drum-digit { width: 40px; }
+
+  /* Scroll scene — large phone */
+  #scene-scroll { gap: 10px; padding: 16px 10px; }
+  .scroll-content-wrapper {
+    max-height: 50vh;
+    padding: 20px 14px 20px 18px;
+  }
+  .scroll-rod { height: 20px; border-radius: 10px; }
+
+  /* Video — on portrait phone use contain so full animation is visible */
+  #chest-video { object-fit: contain; }
 }
 
 /* ── Phone portrait (≤ 480px) ── */
@@ -618,6 +633,11 @@ body {
   .drum-digit { font-size: 1.5rem; }
 
   .cert-card { min-width: 140px; flex-basis: 140px; max-width: none; }
+
+  /* Scroll scene — phone portrait */
+  .scroll-content-wrapper { max-height: 48vh; }
+  .scroll-text { font-size: 0.78rem; line-height: 1.95; }
+  .scroll-text-title { font-size: 0.82rem; margin-bottom: 18px; }
 }
 
 /* ── Small phone (≤ 380px) ── */
@@ -735,25 +755,27 @@ body {
   background: #3d2210;
 }
 
-/* Scroll text typography */
+/* Scroll text typography — Cinzel to match the project's fairy-tale theme */
 .scroll-text {
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: 'Cinzel', serif;
   color: #2e1508;
-  line-height: 1.95;
-  font-size: clamp(0.92rem, 1.8vw, 1.05rem);
+  line-height: 2.1;
+  font-size: clamp(0.82rem, 1.6vw, 0.97rem);
   white-space: pre-wrap;
+  text-align: center;
 }
 .scroll-text-title {
   display: block;
   text-align: center;
-  font-size: clamp(1rem, 2.2vw, 1.18rem);
-  font-weight: bold;
+  font-size: clamp(0.9rem, 2vw, 1.08rem);
+  font-weight: 700;
   color: #5c3a1e;
-  margin-bottom: 22px;
-  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
 }
 .scroll-text-body {
   display: block;
+  font-weight: 400;
 }
 
 /* Bottom fade gradient — signals more content below */
@@ -842,4 +864,14 @@ body {
   .ornate-line            { margin: 10px auto; }
   .intro-verse            { display: none; } /* hide verse to save space */
   .verse                  { line-height: 1.7; }
+
+  /* Scroll scene — landscape phone */
+  #scene-scroll   { gap: 6px; padding: 8px 10px; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; }
+  .scroll-outer   { flex: 1 1 auto; max-width: calc(100% - 120px); }
+  .scroll-content-wrapper { max-height: 70vh; padding: 12px 14px 12px 16px; }
+  .scroll-rod     { height: 16px; border-radius: 8px; }
+  .scroll-next-btn { flex: 0 0 auto; margin-left: 10px; }
+
+  /* Video landscape — cover is correct here */
+  #chest-video { object-fit: cover; }
 }
