@@ -750,6 +750,17 @@ body {
   object-fit: contain;
 }
 
+/* responsive frame width — grows on larger screens */
+@media (min-width: 1200px) {
+  #video-frame { max-width: 640px; }
+}
+@media (min-width: 1600px) {
+  #video-frame { max-width: 800px; }
+}
+@media (min-width: 2200px) {
+  #video-frame { max-width: 980px; }
+}
+
 /* ═══════════════════════════════════════════════
    ADDED: scroll display — scroll text scene
    ═══════════════════════════════════════════════ */
