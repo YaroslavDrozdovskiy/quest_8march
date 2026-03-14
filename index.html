@@ -95,11 +95,17 @@
     <div class="cards-container" id="cards-container"></div>
   </div>
 
-  <!-- chest video — fullscreen video overlay -->
+  <!-- chest video — ornate framed overlay -->
   <div id="video-overlay">
-    <video id="chest-video" muted playsinline preload="auto">
-      <source src="assets/Анимация_открытия_сундука.mp4" type="video/mp4">
-    </video>
+    <div id="video-frame">
+      <span class="vf-corner vf-tl">✦</span>
+      <span class="vf-corner vf-tr">✦</span>
+      <video id="chest-video" muted playsinline preload="auto">
+        <source src="assets/Анимация_открытия_сундука.mp4" type="video/mp4">
+      </video>
+      <span class="vf-corner vf-bl">✦</span>
+      <span class="vf-corner vf-br">✦</span>
+    </div>
   </div>
 
   <!-- scroll text scene -->
