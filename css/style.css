@@ -585,6 +585,10 @@ body {
 @media (max-width: 768px) {
   #scene-reward { justify-content: flex-start; padding-top: 24px; }
   .cards-container { gap: 14px; }
+
+  /* Scroll scene — tablet */
+  #scene-scroll { gap: 14px; padding: 20px 14px; }
+  .scroll-content-wrapper { max-height: 54vh; }
 }
 
 /* ── Large phone / landscape (≤ 600px) ── */
@@ -600,6 +604,17 @@ body {
   .lock-sep   { margin: 0 4px; }
   .drum-arrow { width: 40px; height: 28px; font-size: 0.65rem; }
   .drum-window, .drum-digit { width: 40px; }
+
+  /* Scroll scene — large phone */
+  #scene-scroll { gap: 10px; padding: 16px 10px; }
+  .scroll-content-wrapper {
+    max-height: 50vh;
+    padding: 20px 14px 20px 18px;
+  }
+  .scroll-rod { height: 20px; border-radius: 10px; }
+
+  /* Video — on portrait phone use contain so full animation is visible */
+  #chest-video { object-fit: contain; }
 }
 
 /* ── Phone portrait (≤ 480px) ── */
@@ -618,6 +633,11 @@ body {
   .drum-digit { font-size: 1.5rem; }
 
   .cert-card { min-width: 140px; flex-basis: 140px; max-width: none; }
+
+  /* Scroll scene — phone portrait */
+  .scroll-content-wrapper { max-height: 48vh; }
+  .scroll-text { font-size: 0.88rem; line-height: 1.6; }
+  .scroll-text-title { font-size: 0.92rem; margin-bottom: 10px; }
 }
 
 /* ── Small phone (≤ 380px) ── */
@@ -635,6 +655,203 @@ body {
   #scene-reward .parchment { padding: 18px 14px 16px; }
 }
 
+/* ═══════════════════════════════════════════════
+   ADDED: chest video — fullscreen video overlay
+   ═══════════════════════════════════════════════ */
+#video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+#video-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+#chest-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ═══════════════════════════════════════════════
+   ADDED: scroll display — scroll text scene
+   ═══════════════════════════════════════════════ */
+#scene-scroll {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px 16px;
+}
+
+.scroll-outer {
+  position: relative;
+  max-width: 580px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Decorative wooden rods top & bottom */
+.scroll-rod {
+  height: 26px;
+  flex-shrink: 0;
+  border-radius: 13px;
+  background: linear-gradient(180deg,
+    #a06030 0%, #d4944a 30%, #f0c070 50%, #d4944a 70%, #7a4010 100%);
+  box-shadow:
+    0 3px 10px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.2);
+  position: relative;
+  z-index: 2;
+}
+
+/* Body wrapper — positions fade and hint relative to scroll area */
+.scroll-body-wrap {
+  position: relative;
+}
+
+/* The scrollable parchment area */
+.scroll-content-wrapper {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255,245,210,0.6) 0%, transparent 60%),
+    linear-gradient(160deg, #f5e8c0 0%, #edd9a0 40%, #f0e2b5 100%);
+  max-height: 58vh;
+  overflow-y: scroll;          /* always show scrollbar */
+  padding: 16px 20px 20px 20px;
+  box-shadow:
+    inset 3px 0 8px rgba(0,0,0,0.08),
+    inset -3px 0 8px rgba(0,0,0,0.08),
+    inset 0 6px 16px rgba(0,0,0,0.12),
+    inset 0 -6px 16px rgba(0,0,0,0.12);
+
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #5c3a1e #c8a060;
+}
+
+/* Webkit scrollbar — always visible, clearly styled */
+.scroll-content-wrapper::-webkit-scrollbar {
+  width: 13px;
+}
+.scroll-content-wrapper::-webkit-scrollbar-track {
+  background: #c8a060;
+  border-radius: 0;
+}
+.scroll-content-wrapper::-webkit-scrollbar-thumb {
+  background: #5c3a1e;
+  border-radius: 6px;
+  min-height: 44px;
+  border: 2px solid #c8a060;
+}
+.scroll-content-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #3d2210;
+}
+
+/* Scroll text typography — Cinzel to match the project's fairy-tale theme */
+.scroll-text {
+  font-family: 'Cinzel', serif;
+  color: #2e1508;
+  line-height: 1.65;
+  font-size: clamp(0.95rem, 2vw, 1.08rem);
+  text-align: center;
+  /* no white-space here — avoids rendering HTML whitespace between spans as blank lines */
+}
+.scroll-text-title {
+  display: block;
+  text-align: center;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+  font-weight: 700;
+  color: #5c3a1e;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.scroll-text-body {
+  display: block;
+  font-weight: 400;
+  white-space: pre-wrap; /* pre-wrap only on body to preserve line breaks in text */
+}
+
+/* Bottom fade gradient — signals more content below */
+.scroll-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 13px;  /* leave room for scrollbar */
+  height: 52px;
+  background: linear-gradient(transparent, rgba(210, 165, 70, 0.45));
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.4s ease;
+}
+.scroll-fade-bottom.hidden { opacity: 0; }
+
+/* Bouncing scroll hint */
+.scroll-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 13px;
+  text-align: center;
+  pointer-events: none;
+  z-index: 4;
+  transition: opacity 0.4s ease;
+}
+.scroll-hint.hidden { opacity: 0; }
+.scroll-hint-icon {
+  display: inline-block;
+  font-family: Georgia, serif;
+  font-size: 0.82rem;
+  font-weight: bold;
+  color: #5c3a1e;
+  background: rgba(245, 232, 190, 0.9);
+  border: 1px solid #a07030;
+  padding: 3px 14px;
+  border-radius: 20px;
+  animation: scrollHintBounce 1.5s ease-in-out infinite;
+}
+@keyframes scrollHintBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+
+/* "Далее" button spacing */
+.scroll-next-btn { flex-shrink: 0; }
+
+/* ADDED: scroll unroll animation — scroll-outer unrolls from top when scene becomes active */
+@keyframes scrollUnroll {
+  from {
+    opacity: 0;
+    transform: scaleY(0.15);
+  }
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* ADDED: scroll-next-btn fade in after scroll opens */
+@keyframes scrollBtnFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#scene-scroll.active .scroll-outer {
+  transform-origin: top center;
+  animation: scrollUnroll 0.7s cubic-bezier(0.34, 1.2, 0.64, 1) both;
+}
+
+#scene-scroll.active .scroll-next-btn {
+  animation: scrollBtnFadeIn 0.4s ease 0.55s both;
+}
+
 /* ── Landscape / short screens (≤ 500px height) ── */
 @media (max-height: 500px) {
   .chest-visual { width: 100px; height: 92px; margin-bottom: 10px; }
@@ -648,4 +865,14 @@ body {
   .ornate-line            { margin: 10px auto; }
   .intro-verse            { display: none; } /* hide verse to save space */
   .verse                  { line-height: 1.7; }
+
+  /* Scroll scene — landscape phone */
+  #scene-scroll   { gap: 6px; padding: 8px 10px; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; }
+  .scroll-outer   { flex: 1 1 auto; max-width: calc(100% - 120px); }
+  .scroll-content-wrapper { max-height: 70vh; padding: 12px 14px 12px 16px; }
+  .scroll-rod     { height: 16px; border-radius: 8px; }
+  .scroll-next-btn { flex: 0 0 auto; margin-left: 10px; }
+
+  /* Video landscape — cover is correct here */
+  #chest-video { object-fit: cover; }
 }

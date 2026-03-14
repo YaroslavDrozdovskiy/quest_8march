@@ -13,3 +13,6 @@ desktop.ini
 * (копия*).css
 * (копия*).js
 * (копия*).html
+
+# Claude Code tool config
+.claude/

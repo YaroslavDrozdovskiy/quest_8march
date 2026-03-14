@@ -2,7 +2,7 @@
    КОНФИГУРАЦИЯ — меняй здесь
    ═══════════════════════════════════════════════ */
 
-const SECRET_CODE = '000000';
+const SECRET_CODE = '1804';
 
 // Чтобы добавить приз — скопируй объект ниже и заполни поля:
 // { name: 'Название', value: 'Сумма', img: 'assets/имя_файла.jpg' }
@@ -53,7 +53,7 @@ function showScene(n) {
    ═══════════════════════════════════════════════ */
 
 const ITEM_H       = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--item-h')) || 54;
-const DRUM_COUNT   = 6;
+const DRUM_COUNT   = 4;
 // Padded strip: wrap-around so digit 0 always shows prev/next neighbours
 const STRIP_DIGITS = ['9','0','1','2','3','4','5','6','7','8','9','0'];
 const drumValues   = new Array(DRUM_COUNT).fill(0);
@@ -63,13 +63,6 @@ function buildComboLock() {
   housing.innerHTML = '';
 
   for (let i = 0; i < DRUM_COUNT; i++) {
-    // Separator between digit groups 3|3
-    if (i === 3) {
-      const sep = document.createElement('div');
-      sep.className = 'lock-sep';
-      housing.appendChild(sep);
-    }
-
     const col = document.createElement('div');
     col.className = 'drum-col';
     col.dataset.index = i;
@@ -177,7 +170,122 @@ function checkCode() {
 
 function onOpeningEnter() {
   launchConfetti();
-  setTimeout(() => showScene(4), 2600);
+  // ADDED: chest video — after CSS chest animation settles (~2s), play video
+  setTimeout(() => showChestVideo(), 2000);
+}
+
+/* ADDED: chest video */
+function showChestVideo() {
+  const overlay = document.getElementById('video-overlay');
+  const video   = document.getElementById('chest-video');
+
+  overlay.classList.add('active');
+  video.currentTime = 0;
+  video.play().catch(() => {
+    // Autoplay blocked — skip straight to scroll
+    overlay.classList.remove('active');
+    showScrollScene();
+  });
+
+  video.addEventListener('ended', () => {
+    overlay.classList.remove('active');
+    setTimeout(() => showScrollScene(), 300);
+  }, { once: true });
+}
+
+/* ADDED: scroll display — scroll text constant */
+const SCROLL_TEXT_TITLE = '⚜ Свиток из казны Сберградовской';
+const SCROLL_TEXT_BODY =
+`Сударыни мудрые и отважные!
+
+Вы разгадали тайну чисел
+И открыли казну, что скрыта была
+От глаз недостойных.
+
+Но знайте:
+рыцари Ливонского ордена
+боятся не меча, не копья
+и даже не богатырской силы.
+
+Больше всего на свете
+страшатся они ведьминских проклятий.
+
+Посему, когда явятся они за казной,
+не медлите и не страшитесь.
+
+Говорите громко, единогласно,
+и осыпьте их древними заклятиями —
+и обратятся они в бегство.
+
+Вот слова силы:
+
+— Да чтоб латы ваши ржавчиной покрылись!
+— Чтоб мечи ваши в лапшу согнулись!
+— Чтоб шлемы ваши на глаза съехали!
+— Чтоб кони ваши задом наперёд ходили!
+— Чтоб сапоги ваши к полу прилипли!
+— Чтоб щиты ваши мыши прогрызли!
+— Чтоб бороды ваши узлом завязались!
+— Чтоб доспехи ваши скрипели громче телеги!
+— Чтоб шпоры ваши в узел свернулись!
+— Чтоб меч ваш от ножен убегал!
+
+Кричите дружно, не жалея голоса —
+и не устоит перед вами
+ни один рыцарь заморский.
+
+А когда прогоните их прочь,
+освободите своих богатырей
+и празднуйте победу.
+
+Ибо казна сия —
+лишь малая награда
+за храбрость вашу и мудрость.
+
+Слава вам,
+сударыни-победительницы!`;
+
+/* ADDED: scroll display — show scroll scene */
+function showScrollScene() {
+  // Populate text
+  const titleEl = document.querySelector('#scroll-body-text .scroll-text-title');
+  const bodyEl  = document.querySelector('#scroll-body-text .scroll-text-body');
+  if (titleEl) titleEl.textContent = SCROLL_TEXT_TITLE;
+  if (bodyEl)  bodyEl.textContent  = SCROLL_TEXT_BODY;
+
+  // Transition from active scene to scroll scene
+  const prev = document.querySelector('.scene.active');
+  if (prev) prev.classList.remove('active');
+  setTimeout(() => {
+    const scrollScene = document.getElementById('scene-scroll');
+    scrollScene.classList.add('active');
+    setupScrollHint();
+  }, 100);
+}
+
+/* ADDED: scroll display — hide hint + fade after user scrolls */
+function setupScrollHint() {
+  const wrapper = document.getElementById('scroll-wrapper');
+  const hint    = document.getElementById('scroll-hint');
+  const fade    = document.querySelector('.scroll-fade-bottom');
+
+  if (!wrapper) return;
+
+  wrapper.scrollTop = 0;
+
+  function onScroll() {
+    if (wrapper.scrollTop > 50) {
+      if (hint) hint.classList.add('hidden');
+      if (fade) fade.classList.add('hidden');
+      wrapper.removeEventListener('scroll', onScroll);
+    }
+  }
+  wrapper.addEventListener('scroll', onScroll);
+}
+
+/* ADDED: scroll display — "Далее" button goes to reward scene */
+function proceedToReward() {
+  showScene(4);
 }
 
 function launchConfetti() {

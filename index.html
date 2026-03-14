@@ -57,7 +57,7 @@
       <h2>Замок на сундуке крепок!</h2>
       <p class="hint verse">
         Вращайте барабаны — назовите<br>
-        Шесть заветных цифр, что знаете
+        Четыре заветных цифры, что знаете
       </p>
 
       <!-- Combo Lock — filled by JS -->
@@ -103,6 +103,34 @@
       <p class="congrats-text verse" id="reward-text"></p>
     </div>
     <div class="cards-container" id="cards-container"></div>
+  </div>
+
+  <!-- ADDED: chest video — fullscreen video overlay -->
+  <div id="video-overlay">
+    <video id="chest-video" muted playsinline preload="auto">
+      <source src="reference/Анимация_открытия_сундука.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- ADDED: scroll display — scroll text scene -->
+  <div id="scene-scroll" class="scene">
+    <div class="scroll-outer">
+      <div class="scroll-rod scroll-rod-top"></div>
+      <div class="scroll-body-wrap">
+        <div class="scroll-content-wrapper" id="scroll-wrapper">
+          <div class="scroll-text" id="scroll-body-text">
+            <span class="scroll-text-title"></span>
+            <span class="scroll-text-body"></span>
+          </div>
+        </div>
+        <div class="scroll-fade-bottom"></div>
+        <div class="scroll-hint" id="scroll-hint">
+          <span class="scroll-hint-icon">↓ листайте</span>
+        </div>
+      </div>
+      <div class="scroll-rod scroll-rod-bottom"></div>
+    </div>
+    <button class="btn scroll-next-btn" onclick="proceedToReward()">Далее ✦</button>
   </div>
 
   <script src="js/app.js"></script>
