@@ -154,14 +154,14 @@ function showChestVideo() {
   overlay.classList.add('active');
   video.currentTime = 0;
   video.play().catch(() => {
-    // Autoplay blocked — skip straight to scroll
+    // Autoplay blocked — skip straight to reward
     overlay.classList.remove('active');
-    showScrollScene();
+    showScene(4);
   });
 
   video.addEventListener('ended', () => {
     overlay.classList.remove('active');
-    setTimeout(() => showScrollScene(), 300);
+    setTimeout(() => showScene(4), 300);
   }, { once: true });
 }
 
@@ -295,7 +295,9 @@ function initContent() {
 
   // Scene scroll
   document.getElementById('scroll-hint-text').textContent = CONTENT.scroll.hint;
-  document.getElementById('scroll-next-btn').textContent  = CONTENT.scroll.nextBtn;
+
+  // Scene reward — next button to scroll
+  document.getElementById('reward-next-btn').textContent  = CONTENT.scroll.nextBtn;
 }
 
 /* ═══════════════════════════════════════════════
