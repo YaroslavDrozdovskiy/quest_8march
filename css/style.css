@@ -570,10 +570,9 @@ body {
 }
 .cert-card .cert-icon  { font-size: 2.1rem; margin-bottom: 10px; display: block; }
 .cert-card .cert-name  { font-size: clamp(0.95rem, 2vw, 1.05rem); font-weight: 700; color: var(--gold-light); margin-bottom: 8px; }
-.cert-card .cert-value {
-  font-size: clamp(1.5rem, 3vw, 1.6rem); font-weight: 900;
-  background: linear-gradient(135deg, var(--gold-light), var(--gold));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+.cert-card .cert-poem {
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem); font-style: italic; line-height: 1.6;
+  color: rgba(240,230,211,0.8); margin-top: 6px;
 }
 .cert-card .cert-label { font-size: 0.7rem; color: rgba(240,230,211,0.35); margin-top: 5px; letter-spacing: 3px; text-transform: uppercase; }
 

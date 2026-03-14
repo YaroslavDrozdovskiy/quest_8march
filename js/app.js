@@ -239,7 +239,7 @@ function onRewardEnter() {
     card.innerHTML = `
       ${media}
       <div class="cert-name">${cert.name}</div>
-      <div class="cert-value">${cert.value}</div>
+      <div class="cert-poem">${cert.poem}</div>
       <div class="cert-label">${CONTENT.reward.cardLabel}</div>
     `;
     container.appendChild(card);
